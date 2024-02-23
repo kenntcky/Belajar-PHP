@@ -1,11 +1,12 @@
 <?php
 
 session_start();
-$_SESSION['login'] = false;
 
-if ($_SESSION['login']) {
-    header('Location: /BelajarPHP/PHPWeb/session-login/index.php');
-    exit();
+if (isset($_SESSION['login'])) {
+    if ($_SESSION['login']) {
+        header('Location: /BelajarPHP/PHPWeb/session-login/index.php');
+        exit();
+    }
 }
 
 $error = "";
