@@ -1,0 +1,17 @@
+{
+    "name": "kenntcky/belajar-php-composer",
+    "description": "Belajar PHP Composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kenntcky\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kenntcky",
+            "email": "hologrampulsion@gmail.com"
+        }
+    ],
+    "require": {}
+}
