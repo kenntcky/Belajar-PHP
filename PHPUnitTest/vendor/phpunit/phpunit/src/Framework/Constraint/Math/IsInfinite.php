@@ -14,7 +14,7 @@ use function is_infinite;
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class IsInfinite extends Constraint
+final class IsInfinite extends Constraint
 {
     /**
      * Returns a string representation of the constraint.
@@ -27,8 +27,10 @@ final readonly class IsInfinite extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+     *
+     * @param mixed $other value or object to evaluate
      */
-    protected function matches(mixed $other): bool
+    protected function matches($other): bool
     {
         return is_infinite($other);
     }

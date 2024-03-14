@@ -15,7 +15,7 @@ use function sprintf;
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class IsReadable extends Constraint
+final class IsReadable extends Constraint
 {
     /**
      * Returns a string representation of the constraint.
@@ -28,8 +28,10 @@ final readonly class IsReadable extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+     *
+     * @param mixed $other value or object to evaluate
      */
-    protected function matches(mixed $other): bool
+    protected function matches($other): bool
     {
         return is_readable($other);
     }
@@ -39,12 +41,14 @@ final readonly class IsReadable extends Constraint
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
+     *
+     * @param mixed $other evaluated value or object
      */
-    protected function failureDescription(mixed $other): string
+    protected function failureDescription($other): string
     {
         return sprintf(
             '"%s" is readable',
-            $other,
+            $other
         );
     }
 }

@@ -12,13 +12,8 @@ namespace PHPUnit\Framework\Constraint;
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class LogicalAnd extends BinaryOperator
+final class LogicalAnd extends BinaryOperator
 {
-    public static function fromConstraints(mixed ...$constraints): self
-    {
-        return new self(...$constraints);
-    }
-
     /**
      * Returns the name of this operator.
      */
@@ -40,8 +35,10 @@ final readonly class LogicalAnd extends BinaryOperator
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+     *
+     * @param mixed $other value or object to evaluate
      */
-    protected function matches(mixed $other): bool
+    protected function matches($other): bool
     {
         foreach ($this->constraints() as $constraint) {
             if (!$constraint->evaluate($other, '', true)) {
