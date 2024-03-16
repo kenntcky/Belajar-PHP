@@ -21,11 +21,18 @@ class CounterTest extends TestCase
         $counter->increment();
         self::assertEquals(3, $counter->getCounter());
 
+        return $counter;
+
     }
 
-    public function testOk()
+    /**
+     * @test
+     * @depends testCounter
+     */
+    public function second(Counter $counter)
     {
-        echo "Sok a6" . PHP_EOL;
+        $counter->increment();
+        Assert::assertEquals(4, $counter->getCounter());
     }
 
 }
