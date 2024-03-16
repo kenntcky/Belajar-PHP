@@ -1,6 +1,6 @@
 <?php
 
-namespace Kenntcky\tests;
+namespace Kenntcky\BelajarPhpUnitTest;
 
 use Kenntcky\BelajarPhpUnitTest\Counter;
 use PHPUnit\Framework\Assert;
