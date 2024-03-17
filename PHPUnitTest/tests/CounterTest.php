@@ -52,6 +52,14 @@ class CounterTest extends TestCase
 
     }
 
+    public function testAgain()
+    {
+        self::markTestSkipped("Unfixed bug");
+
+        self::$counter->increment();
+        self::assertEquals(1, self::$counter->getCounter());
+    }
+
     /**
      * @test
      * @depends testCounter
@@ -60,6 +68,14 @@ class CounterTest extends TestCase
     {
         $counter->increment();
         Assert::assertEquals(4, self::$counter->getCounter());
+    }
+
+    /**
+     * @requires OSFAMILY Linux
+     */
+    public function testLinux()
+    {
+        echo "Hi Linux!" . PHP_EOL;
     }
 
     public static function tearDownAfterClass(): void
