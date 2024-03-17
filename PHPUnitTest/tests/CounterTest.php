@@ -8,20 +8,41 @@ use PHPUnit\Framework\TestCase;
 
 class CounterTest extends TestCase
 {
+
+//    protected function setUp(): void
+//    {
+//    }
+
+    /**
+     * @before
+     */
+//    public function createCounter(): void
+//    {
+//        $this->counter = new Counter();
+//        echo "Created counter object" . PHP_EOL;
+//    }
+
+    static private Counter $counter;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$counter = new Counter();
+        echo "Counter test begin" . PHP_EOL;
+    }
+
     public function testCounter()
     {
-        $counter = new Counter();
 
-        $counter->increment();
-        Assert::assertEquals(1, $counter->getCounter());
+        self::$counter->increment();
+        Assert::assertEquals(1, self::$counter->getCounter());
 
-        $counter->increment();
-        $this->assertEquals(2, $counter->getCounter());
+        self::$counter->increment();
+        $this->assertEquals(2, self::$counter->getCounter());
 
-        $counter->increment();
-        self::assertEquals(3, $counter->getCounter());
+        self::$counter->increment();
+        self::assertEquals(3, self::$counter->getCounter());
 
-        return $counter;
+        return self::$counter;
 
     }
 
@@ -32,7 +53,25 @@ class CounterTest extends TestCase
     public function second(Counter $counter)
     {
         $counter->increment();
-        Assert::assertEquals(4, $counter->getCounter());
+        Assert::assertEquals(4, self::$counter->getCounter());
     }
+
+    public static function tearDownAfterClass(): void
+    {
+        echo "Counter test finish" . PHP_EOL;
+    }
+
+//    protected function tearDown(): void
+//    {
+//        echo "Unit test finish using tearDown function override" . PHP_EOL;
+//    }
+//
+//    /**
+//     * @after
+//     */
+//    public function after(): void
+//    {
+//        echo "Unit test finish using annotation after" . PHP_EOL;
+//    }
 
 }
