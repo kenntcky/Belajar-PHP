@@ -30,6 +30,12 @@ class CounterTest extends TestCase
         echo "Counter test begin" . PHP_EOL;
     }
 
+    public function testIncomplete()
+    {
+        self::assertEquals(0, self::$counter->getCounter());
+        self::markTestIncomplete("TODO Do Increment");
+    }
+
     public function testCounter()
     {
 
