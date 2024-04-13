@@ -12,6 +12,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Kenntcky\BelajarPhpMvc\App\Router;
 use Kenntcky\BelajarPhpMvc\Controller\HomeController;
 use Kenntcky\BelajarPhpMvc\Controller\UserController;
+use Kenntcky\BelajarPhpMvc\Controller\ProductController;
+
+Router::add('GET', '/products/([0-9a-zA-Z]*)/([0-9]*)', ProductController::class, 'container');
 
 Router::add('GET', '/', HomeController::class, 'index');
 Router::add('GET', '/login', UserController::class, 'login');
