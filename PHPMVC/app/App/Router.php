@@ -7,13 +7,18 @@ class Router
 
     private static array $routes = [];
 
-    public static function add(string $method, string $path, string $controller, string $function): void
+    public static function add(string $method,
+                               string $path,
+                               string $controller,
+                               string $function,
+                               array  $middlewares = []): void
     {
         self::$routes[] = [
             'method' => $method,
             'path' => $path,
             'controller' => $controller,
-            'function' => $function
+            'function' => $function,
+            'middleware' => $middlewares
         ];
     }
 
@@ -25,17 +30,25 @@ class Router
 
         foreach (self::$routes as $route) {
             $pattern = "#^" . $route['path'] . "$#";
-            if (preg_match($pattern, $path, $variables) && $method == $route['method']) {
+            if (preg_match($pattern, $path, $variables)) {
+                if ($method == $route['method'] || $method == 'POST') {
 
-                $controller = new $route['controller'];
-                $function = $route['function'];
+                    $controller = new $route['controller'];
+                    $function = $route['function'];
 
-                array_shift($variables);
-                call_user_func_array([$controller, $function], $variables);
+                    foreach ($route['middleware'] as $middleware) {
+                        $instance = new $middleware;
+                        $instance->before();
+                    }
 
-                echo '<br>' . 'Controller : ' . $route['controller'] . PHP_EOL . '<br>' .
-                     'Function : ' . $route['function'] . PHP_EOL;
-                return;
+                    array_shift($variables);
+                    call_user_func_array([$controller, $function], $variables);
+
+                    echo '<br>' . 'Controller : ' . $route['controller'] . PHP_EOL . '<br>' .
+                        'Function : ' . $route['function'] . PHP_EOL;
+                    return;
+
+                }
             }
         }
 

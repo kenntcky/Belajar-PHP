@@ -8,6 +8,7 @@ class HomeController
 {
     function index(): void
     {
+
         $model = [
             'title' => 'Belajar PHP MVC',
             'content' => 'Terima kasih PZN telah memberikan ilmu'
